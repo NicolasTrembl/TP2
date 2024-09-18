@@ -56,7 +56,7 @@ Graphe* CreerGraphe(const int ordre) {
     Newgraphe->pSommet = (pSommet*)malloc(ordre*sizeof(pSommet));
 
     for(int i = 0; i < ordre; i++) {
-        Newgraphe->pSommet[i]= (pSommet) malloc(sizeof(struct Sommet));
+        Newgraphe->pSommet[i] = (pSommet) malloc(sizeof(struct Sommet));
         Newgraphe->pSommet[i]->valeur=i;
         Newgraphe->pSommet[i]->arc=NULL;
     }
@@ -145,6 +145,65 @@ void graphe_afficher(Graphe* graphe) {
 
 }
 
+
+#pragma region fifo
+
+typedef struct node {
+    pSommet value;
+    struct node* next;
+} Node;
+
+typedef Node* Fifo;
+
+Fifo creerFifo(const pSommet valeur) {
+    Fifo first = malloc(sizeof(Node));
+    first->next = NULL;
+    first->value = valeur;
+    return first;
+}
+
+Fifo ajouteFifo(Fifo fifo, const pSommet valeur) {
+    if (fifo == NULL) return creerFifo(valeur);
+
+    Node* last = fifo;
+
+    while (last != NULL) {
+        last = last->next;
+    }
+
+    last = malloc(sizeof(Node));
+    last->value = valeur;
+    last->next = NULL;
+    return last;
+}
+
+Fifo pop(const Fifo fifo, int* value) {
+    const Fifo new_first = fifo->next;
+
+
+    if (fifo->value == NULL) {
+        *value = -1;
+    } else {
+
+        *value = fifo->value->valeur;
+    }
+
+
+
+    free(fifo);
+
+
+
+    return new_first;
+}
+
+bool fileVide(const Fifo fifo) {
+    return fifo == NULL;
+}
+
+
+#pragma endregion
+
 /* BFS
  * Suivant :
  * BFS(graphe G, sommet s) {
@@ -164,6 +223,38 @@ void graphe_afficher(Graphe* graphe) {
 */
 
 void bfs(Graphe* graphe, pSommet origine) {
+    Fifo fifo = ajouteFifo(NULL, origine);
+
+    bool marked[graphe->ordre];
+
+
+
+    while (!fileVide(fifo)) {
+        int value;
+        fifo = pop(fifo, &value);
+
+
+        marked[value] = true;
+
+
+
+        struct Arc* arc = graphe->pSommet[value]->arc;
+
+        while (arc != NULL) {
+            arc = arc->arc_suivant;
+
+            if (!marked[arc->sommet]) {
+                fifo = ajouteFifo(fifo, graphe->pSommet[arc->sommet]);
+                printf("Sommet %d", arc->sommet);
+            }
+
+        }
+    }
+    printf("vide\n");
+
+
+    free(fifo);
+
 
 }
 
@@ -183,6 +274,10 @@ int main() {
 
     /// afficher le graphe
     graphe_afficher(g);
+
+    printf("affiché\n");
+
+    bfs(g, g->pSommet[0]);
 
     freeGraphe(g);
 

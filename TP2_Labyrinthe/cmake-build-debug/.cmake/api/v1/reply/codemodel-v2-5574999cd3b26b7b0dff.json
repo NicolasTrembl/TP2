@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.26"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "TP2_Labyrinthe",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "TP2_Labyrinthe::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-TP2_Labyrinthe-Debug-92752402d85585bb8ac6.json",
+					"name" : "TP2_Labyrinthe",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/ntrem/OneDrive/Bureau/ECE/Th\u00e9orie des graphes/TP2/TP2_Labyrinthe/cmake-build-debug",
+		"source" : "C:/Users/ntrem/OneDrive/Bureau/ECE/Th\u00e9orie des graphes/TP2/TP2_Labyrinthe"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
